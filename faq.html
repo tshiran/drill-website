@@ -1,0 +1,108 @@
+---
+layout: page
+title: Frequently Asked Questions
+---
+            <h3>What use cases should I consider using Drill for?</h3>
+            <p>
+            	Drill provides low latency SQL queries on large-scale datasets. Example use cases for Drill include
+                <ul>
+                	<li>Interactive data exploration/data discovery</li>
+                    <li>Adhoc BI/reporting queries</li>
+                    <li>Analytics on NoSQL data</li>
+                    <li>Real time or Day zero analytics (i.e analyze data as it comes with no preparation/ETL)</li>
+				</ul>
+           	</p>
+            <p>We expect Drill to be used in lot more use cases where low latency is required.</p>
+    
+            <h3>Does Drill replace Hive for batch processing? What about my OLTP applications?</h3>
+            <p>Drill complements batch-processing frameworks such as Hive, Pig, MapReduce to support low latency queries. Drill at this point doesn't make an optimal choice for OLTP/operational applications that require sub-second response times. </p>
+            
+            <h3>There are lots of SQL on Hadoop technologies out there. How is Drill different?</h3>
+            <p>
+                Drill takes a different approach to SQL-on-Hadoop than Hive and other related technologies. The goal for Drill is to bring the SQL ecosystem and performance of the relational systems to Hadoop-scale data without compromising on the flexibility of Hadoop/NoSQL systems. Drill provides a flexible query environment for users with the key capabilities as below.
+                <ul>
+                    <li>Self-describing data support without centralized schema definitions/management</li>
+                    <li>Support for complex/multi-structured data types</li>
+                    <li>ANSI SQL support (not SQL "Like") &amp; BI tool integration</li> 
+                    <li>Extensibility to go beyond Hadoop environments</li>
+                </ul>
+            </p>
+    
+            <h3>What is self-describing data?</h3>
+            <p>Self-describing data is where schema is specified as part of the data itself. File formats such as Parquet, JSON, ProtoBuf, XML, AVRO and NoSQL databases are all examples of self-describing data. Some of these data formats also dynamic and complex in that every record in the data can have its own set of columns/attributes and each column can be semi-structured/nested.</p>
+    
+            <h3>How does Drill support queries on self-describing data?</h3>
+            <p>
+                Drill enables queries on self-describing data using the fundamental architectural foundations as below.<br>
+                <ul>
+                    <li>Dynamic schema discovery or late binding:  Drill allows performing queries directly on self-describing data such as Files, HBase without defining overlay schema definitions in Hive metastore.  The schema is discovered on the fly at the query time. With the dynamic schema discovery, Drill makes it easy to support dynamic and rapidly evolving data models.</li>
+                    <li>Flexible data model:  Drill is built from the ground up for complex/semi-structured data commonly seen in Hadoop/NoSQL systems. Drill provides intuitive extensions to SQL to represent and operate on complex data. The internal data model of Drill is hierarchical and columnar with which it can represent and perform efficient SQL processing on complex data natively without flattening into rows either at the design time or runtime.</li> 
+                </ul>
+            </p>
+            
+            <p>Together with the dynamic data discovery and a flexible data model that can handle complex data types, Drill allows users to get fast and complete value from all their data.</p>
+    
+            <h3>But I already have schemas defined in Hive metastore? Can I use that with Drill?</h3>
+            <p>Yes, Hive also serves as data source for Drill. So you can simply point to the Hive metastore from Drill and start performing low latency queries on Hive tables with no modifications. </p>
+    
+            <h3>Is Drill trying to be "anti-schema" or "anti-dba"?</h3>
+            <p>
+                Of course not! Central EDW schemas work great if data models are not changing often, value of data is well understood and is ready to be operationalized for regular reporting purposes. However, during data exploration and discovery phase, rigid modeling requirement poses challenges and delays value from data, especially in the Hadoop/NoSQL environments where the data is highly complex, dynamic and evolving fast. Few challenges include
+                <ul>
+                    <li>Complex data models (eg: JSON)  are hard to map to relational paradigms</li>
+                    <li>Centralized schemas are hard to keep up with when data models evolve fast</li>
+                    <li>Static models defined for known questions are not enough for the diversity and volumes of big data</li>
+                    <li>Non-repetitive/ad hoc queries and short-term data exploration needs may not justify modeling costs</li>
+                </ul>
+            </p>
+    
+            <p>Drill is all about flexibility. The flexible schema management capabilities in Drill lets users explore the data in its native format as it comes in directly and create models/structure if needed in Hive metastore or using the CREATE TABLE/CREATE VIEW syntax within Drill.</p>
+    
+            <h3>What does a Drill query look like?</h3>
+            <p>Drill uses a de-centralized metadata model and relies on its storage plugins to provide with the metadata. Drill supports queries on file system (distributed and local), HBase and Hive tables. There is a storage plugin associated with each data source that is supported by Drill.<br><br>
+            Here is the anatomy of a Drill query. </p>
+            <img src="images/overview-img1.png" width="550" alt="">
+    
+            <h3>Can I connect to Drill from my BI tools (such as Tableau, Microstrategy, etc.)?</h3>
+            <p>Yes, Drill provides JDBC/ODBC drivers for integrating with BI/SQL based tools. </p>
+    
+            <h3>What SQL functionality can Drill support?</h3>
+            <p>
+                Drill provides ANSI standard SQL (not SQL "Like" or Hive QL) with support for all key analytics functionality such as SQL data types, joins, aggregations, filters, sort, sub-queries (including correlated), joins in where clause etc. <a href="https://cwiki.apache.org/confluence/display/DRILL/SQL+Overview" target="new">Click here</a> for reference on SQL functionality in Drill.
+            </p>
+    
+            <h3>What Hadoop distributions does Drill work with?</h3>
+            <p>Drill is not designed with a particular Hadoop distribution in mind and we expect it to work with all Hadoop distributions that support Hadoop 2.3.x file client API. We have validated it so far with Apache Hadoop/MapR/CDH and Amazon EMR* distributions.</p>
+            <p><em style="font-size:14px">* Custom configuration required. Please contact <a href="drill-user@incubator.apache.org">drill-user@incubator.apache.org</a> for questions</em></p>
+            
+            <h3>How does Drill achieve performance?</h3>
+            <p>
+                Drill is built from the ground up for performance on large-scale datasets. The key architectural components that help in achieving performance include. 
+                <ul>
+                    <li>Distributed query optimization &amp; execution</li>
+                    <li>Columnar execution</li>
+                    <li>Vectorization</li>
+                    <li>Runtime compilation &amp; code generation</li>
+                    <li>Optimistic/pipelined execution</li>
+                </ul>
+            </p>
+    
+            <h3>Does Drill support multi-tenant/high concurrency environments?</h3>
+            <p>Drill is built to support several 100s of queries at any given point. Clients can submit requests to any node running Drillbit service in the cluster (no master-slave concept). To support more users, you simply have to add more nodes to the cluster.</p>
+            
+            <h3>Do I need to load data into Drill to start querying it?</h3>
+            <p>No. Drill can query data "in situ".</p>
+    
+            <h3>What is the best way to get started with Drill?</h3>
+            <p>The best way to get started is to just try it out. It just takes a few minutes even if you do not have a cluster. Here is a good place to start -  <a href="https://cwiki.apache.org/confluence/display/DRILL/Apache+Drill+in+10+Minutes" target="_new">Apache Drill in 10 minutes.</a></p>
+    
+    
+            <h3>How can I ask questions and provide feedback?</h3>
+            <p>Please post your questions and feedback on <a href="mailto:drill-user@incubator.apache.org">drill-user@incubator.apache.org</a>. We are happy to have you try out Drill and help with any questions!</p>
+    
+            <h3>How can I contribute to Drill?</h3>
+            <p>
+                Please refer to the <a href="community.html#getinvolved">Get Involved</a> page on how to get involved with Drill.<br>
+                <a href="https://cwiki.apache.org/confluence/display/DRILL/Contributing" target="_new">Here is how you can contribute.</a><br>
+                Please contact <a href="mailto:drill-dev@incubator.apache.org">drill-dev@incubator.apache.org</a> for any questions.
+            </p>
