@@ -42,10 +42,7 @@ cd ../_site-apache/site/trunk/content/drill
 
 Then `svn add` and `svn rm` as needed, and commit the changes via `svn commit -m "Website update"`.
 
-Review the new website in the Apache staging area:
+Review the new website in the Apache staging area: [drill.staging.apache.org/drill](drill.staging.apache.org/drill)
 
-* Incubator: [drill.staging.apache.org/drill](drill.staging.apache.org/drill)
-* TLP: [drill.apache.org](drill.apache.org)
-
-Go to [cms.apache.org](cms.apache.org) and click on [Publish drill site](https://cms.apache.org/drill/publish).
+Go to [https://cms.apache.org](https://cms.apache.org) (use your Apache credentials) and click on [Publish drill site](https://cms.apache.org/drill/publish).
 
