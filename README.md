@@ -10,7 +10,7 @@ To preview the website on your local machine:
 jekyll serve --config _config.yml,_config-tlp.yml
 ```
 
-To contribute changes to the site, submit a pull request. I plan to move 
+To contribute changes to the site, submit a pull request.
 
 # Compiling the Website
 
