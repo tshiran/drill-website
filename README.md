@@ -32,8 +32,6 @@ jekyll build --config _config.yml,_config-tlp.yml
 
 Apache project websites use a system called svnpubsub for publishing. Basically, the static HTML needs to be pushed by one of the committers into the Apache SVN.
 
-Start by checking out the directory
-
 ```bash
 svn co https://svn.apache.org/repos/asf/incubator/drill ../_site-apache
 cp -R _site/* ../_site-apache/site/trunk/content/drill/
