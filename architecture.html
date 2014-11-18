@@ -16,7 +16,7 @@ description: Apache Drill is a low latency distributed query engine for large-sc
             <p>
 
             	The following image represents the flow of a Drill query:
-            	<img src="images/arc-1.jpg" alt="The flow of a Drill query" width="550">
+            	<img src="{{ site.baseurl }}images/arc-1.jpg" alt="The flow of a Drill query" width="550">
 
                 The flow of a Drill query typically involves the following steps:
 
@@ -33,7 +33,7 @@ description: Apache Drill is a low latency distributed query engine for large-sc
             <h2>Core Modules within a Drillbit</h2>
             <p>The following image represents Drillbit components:</p>
 
-           	<img src="images/arc-2.jpg" alt="Drillbit components" width="525">
+           	<img src="{{ site.baseurl }}images/arc-2.jpg" alt="Drillbit components" width="525">
 
             <p>• RPC end point: Drill exposes a low overhead protobuf-based RPC protocol to communicate with the clients. Additionally, a C++ and Java API layers are also available for the client applications to interact with Drill. Clients can communicate to a specific Drillbit directly or go through a ZooKeeper quorum to discover the available Drillbits before submitting queries. It is recommended that the clients always go through ZooKeeper to shield clients from the intricacies of cluster management, such as the addition or removal of nodes.</p>
             <p>• SQL parser: Drill uses Optiq, the open source framework, to parse incoming queries. The output of the parser component is a language agnostic, computer-friendly logical plan that represents the query.</p>
@@ -98,7 +98,7 @@ The following list provides a few examples of Drill's extensible architectural c
 &nbsp;</p>
 <li><p><strong>Runtime compilation</strong>: 
 Runtime compilation is faster compared to the interpreted execution. Drill generates highly efficient custom code for every single query for every single operator.  Here is a quick overview of the Drill compilation/code generation process at a glance.
-<br><img src="images/drillcompiler.png" width="500">
+<br><img src="{{ site.baseurl }}images/drillcompiler.png" width="500">
 &nbsp;</p>
 <li><p><strong>Optimistic and pipelined query execution</strong>: Drill adopts an optimistic execution model to process queries. Drill assumes that failures are infrequent within the short span of a query and therefore does not spend time creating boundaries or checkpoints to minimize recovery time. Failures at node level are handled gracefully. In the instance of a single query failure, the query is rerun. Drill execution uses a pipeline model where all tasks are scheduled at once. The query execution happens in-memory as much as possible to move data through task pipelines, persisting to disk only if there is memory overflow. 
 &nbsp;</p>
