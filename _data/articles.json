@@ -1,12 +1,8 @@
 [
 {
-	title: "Cool article",
-	url: "http://www.cnn.com/",
-	"excerpt": This is a cool article.
-},
-{
-	title: "Another article",
-	url: "http://www.foo.com/",
-	"excerpt": This is another article.
+  "title": "How to Turn Raw Data from Yelp into Insights in Minutes with Apache Drill",
+  "url": "https://www.mapr.com/blog/how-turn-raw-data-yelp-insights-minutes-apache-drill",
+  "excerpt": "",
+  "date": "2014-11-13"
 }
 ]
