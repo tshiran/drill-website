@@ -4,7 +4,6 @@ title: "Analyzing Real-World Data"
 code: analyzing-real-world-data
 excerpt: 
 date: 2014-11-17 13:50:01
-categories: blog
 authors: ["Neeraja"]
 ---
 # Run Drill in Embedded Mode

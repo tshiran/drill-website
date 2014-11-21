@@ -1,0 +1,12 @@
+[
+{
+	title: "Cool article",
+	url: "http://www.cnn.com/",
+	"excerpt": This is a cool article.
+},
+{
+	title: "Another article",
+	url: "http://www.foo.com/",
+	"excerpt": This is another article.
+}
+]

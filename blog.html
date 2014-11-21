@@ -6,3 +6,7 @@ title: Blog
 {% for post in site.categories.blog %}<!-- previously: site.posts -->
 <p><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a> ({{ post.date | date: "%b %-d, %Y" }})<br/>{{ post.excerpt }}</p>
 {% endfor %}
+
+{% for article in site.data.articles %}<!-- previously: site.posts -->
+<p><a class="post-link" href="{{ article.url }}">{{ article.title }}</a><br/>{{ article.excerpt }}</p>
+{% endfor %}
