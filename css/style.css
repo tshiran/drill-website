@@ -25,7 +25,7 @@ pre {
     border: 1px solid #ccc;
     border-radius: 2px;
     background-color: #f8f8f8;
-		overflow:auto;
+		overflow: auto;
 }
 
 a.anchor {
@@ -669,7 +669,7 @@ table.intro a {
 	font-weight:normal;	
 }
 
-.int_text p, .int_text ul { 
+.int_text p, .int_text ul, .int_text ol { 
 	font-size:16px;
 	font-weight:lighter;
 	line-height:30px;
@@ -821,6 +821,7 @@ div.download table a.dl {
 	background-size:13px auto;
 	background-image:url(../images/download-ico.png);
 }
+
 div.download table a.dl:hover {
 	background-color:#348436;
 }
