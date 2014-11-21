@@ -2,11 +2,7 @@
 layout: page
 title: Blog
 ---
-<ul class="post-list">
-  {% for post in site.posts %}
-    <li>
-      <!-- <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span> -->
-      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
+<p class="info">Want to add a post here? Check out the source code for some of the <a href="http://www.github.com/tshiran/drill-website/_posts">existing posts</a> to see how it's done. When you're ready, email your Markdown file to <a href="mailto:dev@drill.apache.org">dev@drill.apache.org</a>.</p>
+{% for post in site.categories.blog %}<!-- previously: site.posts -->
+<p><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a> ({{ post.date | date: "%b %-d, %Y" }})<br/>{{ post.excerpt }}</p>
+{% endfor %}

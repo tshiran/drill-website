@@ -834,3 +834,9 @@ div.download table a.find {
 div.download table a.find:hover {
 	background-color:#145aa8;
 }
+
+p.info {
+	background-color: #ff9;
+	border: solid 1px #cc9;
+	padding: 5px;
+}
