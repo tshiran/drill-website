@@ -53,7 +53,7 @@ The instructions are divided into the following subtopics:
     }
     ```
 
-  Where `host1` and `host2` are `mongod` hostnames in the replica set.
+    Where `host1` and `host2` are `mongod` hostnames in the replica set.
 
 ![Drill on MongoDB in replicated mode]({{ site.baseurl }}/static/{{ page.code }}/replicated.png)
 
@@ -74,7 +74,7 @@ In replicated mode, whichever drillbit receives the query connects to the neares
     }
     ```
 
-  Where `host1` and `host2` are the `mongos` hostnames.
+    Where `host1` and `host2` are the `mongos` hostnames.
 
 ![Drill on MongoDB in sharded mode]({{ site.baseurl }}/static/{{ page.code }}/sharded.png)
  
