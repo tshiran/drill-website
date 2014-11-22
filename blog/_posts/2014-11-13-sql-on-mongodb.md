@@ -26,14 +26,16 @@ The instructions are divided into the following subtopics:
 * Start Drill in embedded mode ([Installing Drill in Embedded Mode](https://cwiki.apache.org/confluence/display/DRILL/Installing+Drill+in+Embedded+Mode) & [Starting/Stopping Drill](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=44994063)) 
 * Access the Web UI through the local drillbit: <http://localhost:8047/>
 * Enable the Mongo storage plugin and update its configuration:
-  {% highlight json %}
-{
-  "type": "mongo",
-  "connection": "mongodb://localhost:27017",
-  "enabled": true
-}
-{% endhighlight %}
-By default, `mongod` listens on port 27017.
+
+    ```
+    {
+      "type": "mongo",
+      "connection": "mongodb://localhost:27017",
+      "enabled": true
+    }
+    ```
+
+  By default, `mongod` listens on port 27017.
 
 ![Drill on MongoDB in standalone mode]({{ site.baseurl }}/static/{{ page.code }}/standalone.png)
 
@@ -42,14 +44,14 @@ By default, `mongod` listens on port 27017.
 * Start Drill in distributed mode ([Installing Drill in Distributed Mode](https://cwiki.apache.org/confluence/display/DRILL/Installing+Drill+in+Distributed+Mode) & [Starting/Stopping Drill](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=44994063))
 * Access the Web UI through any drillbit: <http://drillbit2:8047>
 * Enable the Mongo storage plugin and update its configuration:
-{% highlight json %}
-{
-  "type": "mongo",
-  "connection": "mongodb://<host1>:<port1>,<host2>:<port2>",
-  "enabled": true
-} 
-{% endhighlight %}
-Where `host1` and `host2` are `mongod` hostnames in the replica set.
+
+      {
+        "type": "mongo",
+        "connection": "mongodb://<host1>:<port1>,<host2>:<port2>",
+        "enabled": true
+      }
+
+  Where `host1` and `host2` are `mongod` hostnames in the replica set.
 
 ![Drill on MongoDB in replicated mode]({{ site.baseurl }}/static/{{ page.code }}/replicated.png)
 
@@ -61,14 +63,14 @@ In replicated mode, whichever drillbit receives the query connects to the neares
 * Start Drill in distributed mode ([Installing Drill in Distributed Mode](https://cwiki.apache.org/confluence/display/DRILL/Installing+Drill+in+Distributed+Mode) & [Starting/Stopping Drill](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=44994063))
 * Access the Web UI through any drillbit: <http://drillbit3:8047>
 * Enable the Mongo storage plugin and update its configuration:
-{% highlight json %}
-{ 
-  "type": "mongo",
-  "connection": "mongodb://<host1>:<port1>,<host2>:<port2>",
-  "enabled": true
-}
-{% endhighlight %}
-Where `host1` and `host2` are the `mongos` hostnames.
+
+      { 
+        "type": "mongo",
+        "connection": "mongodb://<host1>:<port1>,<host2>:<port2>",
+        "enabled": true
+      }
+
+  Where `host1` and `host2` are the `mongos` hostnames.
 
 ![Drill on MongoDB in sharded mode]({{ site.baseurl }}/static/{{ page.code }}/sharded.png)
  
@@ -88,25 +90,27 @@ Here is a simple exercise that provides steps for creating an `empinfo` collecti
 
 1. Download [zips.json](http://media.mongodb.org/zips.json) and the [empinfo.json]({{ site.baseurl }}/static/{{ page.code }}/empinfo.json) dataset referenced at the end of blog.
 2. Import the zips.json and empinfo.json files into Mongo using the following command:  
-{% highlight bash %}
-mongoimport --host localhost --db test --collection zips < zips.json
-mongoimport --host localhost --db employee --collection empinfo < empinfo.json
-{% endhighlight %}
-3. Issue the following queries either from sqlline (Drill’s shell) or from the Drill Web UI to get corresponding results from the Mongo collection. 
-    * To issue queries from the web UI, open the Drill web UI and go to Query tab. 
-    * To issue queries from sqlline, connect to sqlline using the following command: 
-{% highlight bash %}<DRILLHOME>/bin/sqlline -u jdbc:drill:zk=zkhost:2181 -n admin -p admin{% endhighlight %}
-4. Queries:
-{% highlight sql %}
-SELECT first_name, last_name, position_id
-FROM mongo.employee.`empinfo`
-WHERE employee_id = 1107 AND position_id = 17 AND last_name = 'Yonce';  
 
-SELECT city, sum(pop)
-FROM mongo.test.`zips` zipcodes
-WHERE state IS NOT NULL GROUP BY city
-ORDER BY sum(pop) DESC LIMIT 1;
-{% endhighlight %}
+       mongoimport --host localhost --db test --collection zips < zips.json
+       mongoimport --host localhost --db employee --collection empinfo < empinfo.json
+
+3. Issue the following queries either from sqlline (Drill’s shell) or from the Drill Web UI to get corresponding results from the Mongo collection. 
+   * To issue queries from the web UI, open the Drill web UI and go to Query tab. 
+   * To issue queries from sqlline, connect to sqlline using the following command: 
+	 
+         <DRILLHOME>/bin/sqlline -u jdbc:drill:zk=zkhost:2181 -n admin -p admin
+
+4. Queries:
+
+       SELECT first_name, last_name, position_id
+       FROM mongo.employee.`empinfo`
+       WHERE employee_id = 1107 AND position_id = 17 AND last_name = 'Yonce';  
+
+       SELECT city, sum(pop)
+       FROM mongo.test.`zips` zipcodes
+       WHERE state IS NOT NULL GROUP BY city
+       ORDER BY sum(pop) DESC LIMIT 1;
+
 
 *Note*: If a field contains a mixture of different data types across different records, such as both int and decimal values, then queries fail unless `store.mongo.all_text_mode = true` and aggregations fail in that case. For more information refer to [DRILL-1475](https://issues.apache.org/jira/browse/DRILL-1475) and [DRILL-1460](https://issues.apache.org/jira/browse/DRILL-1460).
 
