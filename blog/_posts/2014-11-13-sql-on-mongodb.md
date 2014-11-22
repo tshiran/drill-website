@@ -27,7 +27,7 @@ The instructions are divided into the following subtopics:
 * Access the Web UI through the local drillbit: <http://localhost:8047/>
 * Enable the Mongo storage plugin and update its configuration:
 
-    ```
+    ```json
     {
       "type": "mongo",
       "connection": "mongodb://localhost:27017",
@@ -45,11 +45,13 @@ The instructions are divided into the following subtopics:
 * Access the Web UI through any drillbit: <http://drillbit2:8047>
 * Enable the Mongo storage plugin and update its configuration:
 
-      {
-        "type": "mongo",
-        "connection": "mongodb://<host1>:<port1>,<host2>:<port2>",
-        "enabled": true
-      }
+    ```json
+    {
+      "type": "mongo",
+      "connection": "mongodb://<host1>:<port1>,<host2>:<port2>",
+      "enabled": true
+    }
+    ```
 
   Where `host1` and `host2` are `mongod` hostnames in the replica set.
 
