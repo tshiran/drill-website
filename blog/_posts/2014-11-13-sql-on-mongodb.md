@@ -66,11 +66,13 @@ In replicated mode, whichever drillbit receives the query connects to the neares
 * Access the Web UI through any drillbit: <http://drillbit3:8047>
 * Enable the Mongo storage plugin and update its configuration:
 
-      { 
-        "type": "mongo",
-        "connection": "mongodb://<host1>:<port1>,<host2>:<port2>",
-        "enabled": true
-      }
+    ```json
+    { 
+      "type": "mongo",
+      "connection": "mongodb://<host1>:<port1>,<host2>:<port2>",
+      "enabled": true
+    }
+    ```
 
   Where `host1` and `host2` are the `mongos` hostnames.
 
@@ -93,57 +95,62 @@ Here is a simple exercise that provides steps for creating an `empinfo` collecti
 1. Download [zips.json](http://media.mongodb.org/zips.json) and the [empinfo.json]({{ site.baseurl }}/static/{{ page.code }}/empinfo.json) dataset referenced at the end of blog.
 2. Import the zips.json and empinfo.json files into Mongo using the following command:  
 
-       mongoimport --host localhost --db test --collection zips < zips.json
-       mongoimport --host localhost --db employee --collection empinfo < empinfo.json
+    ```bash
+    mongoimport --host localhost --db test --collection zips < zips.json
+    mongoimport --host localhost --db employee --collection empinfo < empinfo.json
+    ```
 
 3. Issue the following queries either from sqlline (Drill’s shell) or from the Drill Web UI to get corresponding results from the Mongo collection. 
    * To issue queries from the web UI, open the Drill web UI and go to Query tab. 
    * To issue queries from sqlline, connect to sqlline using the following command: 
-	 
-         <DRILLHOME>/bin/sqlline -u jdbc:drill:zk=zkhost:2181 -n admin -p admin
+
+        ```bash
+        <DRILLHOME>/bin/sqlline -u jdbc:drill:zk=zkhost:2181 -n admin -p admin
+        ```
 
 4. Queries:
 
-       SELECT first_name, last_name, position_id
-       FROM mongo.employee.`empinfo`
-       WHERE employee_id = 1107 AND position_id = 17 AND last_name = 'Yonce';  
+    ```sql
+    SELECT first_name, last_name, position_id
+    FROM mongo.employee.`empinfo`
+    WHERE employee_id = 1107 AND position_id = 17 AND last_name = 'Yonce';  
 
-       SELECT city, sum(pop)
-       FROM mongo.test.`zips` zipcodes
-       WHERE state IS NOT NULL GROUP BY city
-       ORDER BY sum(pop) DESC LIMIT 1;
-
+    SELECT city, sum(pop)
+    FROM mongo.test.`zips` zipcodes
+    WHERE state IS NOT NULL GROUP BY city
+    ORDER BY sum(pop) DESC LIMIT 1;
+    ```
 
 *Note*: If a field contains a mixture of different data types across different records, such as both int and decimal values, then queries fail unless `store.mongo.all_text_mode = true` and aggregations fail in that case. For more information refer to [DRILL-1475](https://issues.apache.org/jira/browse/DRILL-1475) and [DRILL-1460](https://issues.apache.org/jira/browse/DRILL-1460).
 
 To set `store.mongo.all_text_mode = true`, execute the following command in sqlline:
 
-{% highlight sql %}
+```sql
 alter session set store.mongo.all_text_mode = true
-{% endhighlight %}
+```
 
 ## Securely Accessing MongoDB
 Create two databases, emp and zips. For each database, create a user with read privileges. As an example, for the zips database, create a user “apache” with read privileges. For the emp database, create a user “drill” with read privileges.
 
 The apache user will be able to query the zips database by using the following storage plugin configuration:
 
-{% highlight json %}
+```json
 { 
   "type": "mongo",
   "connection": "mongodb://apache:apache@localhost:27017/zips",
   "enabled": true
 }
-{% endhighlight %}
+```
 
 The `drill` user will be able to query the `emp` database by using the following storage plugin configuration:
 
-{% highlight json %}
+```json
 { 
   "type": "mongo",
   "connection": "mongodb://drill:drill@localhost:27017/emp",
   "enabled": true 
 }
-{% endhighlight %}
+```
 
 *Note*: The security patch may be included in next release. Check [DRILL-1502](https://issues.apache.org/jira/browse/DRILL-1502) for status.
 
