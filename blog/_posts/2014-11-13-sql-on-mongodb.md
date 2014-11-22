@@ -114,7 +114,7 @@ Here is a simple exercise that provides steps for creating an `empinfo` collecti
     SELECT first_name, last_name, position_id
     FROM mongo.employee.`empinfo`
     WHERE employee_id = 1107 AND position_id = 17 AND last_name = 'Yonce';  
-
+    
     SELECT city, sum(pop)
     FROM mongo.test.`zips` zipcodes
     WHERE state IS NOT NULL GROUP BY city
