@@ -7,17 +7,20 @@ To preview the website through GitHub Pages: [http://tshiran.github.io/drill-web
 To preview the website on your local machine:
 
 ```bash
-jekyll serve --config _config.yml,_config-tlp.yml
+jekyll serve --config _config.yml,_config-prod.yml
 ```
 
 To contribute changes to the site, submit a pull request.
 
 # Compiling the Website
 
-Once the website is ready, you'll need to compile the site to static HTML so that it can then be published to Apache. This is as simple as running the `jekyll build` command. The _config-incubator.yml and _config-tlp.yml configuration files make sure that the noindex meta tag is removed, and incorporate the correct base URL.
+Once the website is ready, you'll need to compile the site to static HTML so that it can then be published to Apache. This is as simple as running the `jekyll build` command. The _config-prod.yml configuration file causes a few changes to the site:
+
+* The `noindex` meta tag is removed. We want the production site to be indexed by search engines, but we don't want the staging site to be indeded.
+* The base URL is set to `/`. The production site is at `/`, whereas the staging site is at `/drill-webiste/`.
 
 ```bash
-jekyll build --config _config.yml,_config-tlp.yml
+jekyll build --config _config.yml,_config-prod.yml
 ```
 
 # Uploading to the Apache Website (Drill Committers Only)
